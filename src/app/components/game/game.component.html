@@ -1,0 +1,93 @@
+<GridLayout rows="*, auto" class="game-container">
+
+  <!-- Game Area -->
+  <StackLayout row="0" class="game-area" (tap)="gameState?.isRunning ? jump() : startGame()">
+    
+    <!-- Sky Background -->
+    <AbsoluteLayout class="sky">
+      
+      <!-- Animated Clouds -->
+      <StackLayout *ngFor="let cloud of clouds" 
+                  class="cloud"
+                  [top]="cloud.y"
+                  [left]="cloud.x"
+                  [width]="cloud.width"
+                  [height]="cloud.height">
+      </StackLayout>
+      
+      <!-- Ground -->
+      <StackLayout class="ground" top="350" left="0" width="100%" height="2"></StackLayout>
+      
+      <!-- Running Dinosaur with Animation -->
+      <GridLayout 
+        *ngIf="dinosaur"
+        class="dinosaur-container"
+        [class.jumping]="dinosaur.isJumping"
+        [top]="dinosaur.y - dinosaur.height"
+        [left]="dinosaur.x"
+        [width]="dinosaur.width"
+        [height]="dinosaur.height">
+        
+        <!-- Dinosaur Body -->
+        <StackLayout class="dinosaur-body"></StackLayout>
+        
+        <!-- Running Legs Animation -->
+        <StackLayout *ngIf="!dinosaur.isJumping" class="legs-container">
+          <StackLayout class="leg back-leg" 
+                      [class]="'leg-frame-' + getDinosaurRunFrame()"></StackLayout>
+          <StackLayout class="leg front-leg" 
+                      [class]="'leg-frame-' + getDinosaurRunFrame()"></StackLayout>
+        </StackLayout>
+        
+        <!-- Jumping Pose -->
+        <StackLayout *ngIf="dinosaur.isJumping" class="jumping-pose">
+          <StackLayout class="leg back-leg jumping-leg"></StackLayout>
+          <StackLayout class="leg front-leg jumping-leg"></StackLayout>
+        </StackLayout>
+        
+      </GridLayout>
+      
+      <!-- Obstacles -->
+      <GridLayout 
+        *ngFor="let obstacle of obstacles"
+        class="obstacle-container"
+        [class.cactus]="isCactus(obstacle)"
+        [class.bird]="isBird(obstacle)"
+        [top]="obstacle.y - obstacle.height"
+        [left]="obstacle.x"
+        [width]="obstacle.width"
+        [height]="obstacle.height">
+        
+        <!-- Cactus -->
+        <StackLayout *ngIf="isCactus(obstacle)" class="cactus-body">
+          <StackLayout class="cactus-arm cactus-arm-1"></StackLayout>
+          <StackLayout class="cactus-arm cactus-arm-2"></StackLayout>
+        </StackLayout>
+        
+        <!-- Bird with Flying Animation -->
+        <GridLayout *ngIf="isBird(obstacle)" class="bird-container">
+          <StackLayout class="bird-body"></StackLayout>
+          <StackLayout class="bird-wing left-wing" 
+                      [class]="'wing-frame-' + getBirdFlyFrame(obstacle)"></StackLayout>
+          <StackLayout class="bird-wing right-wing" 
+                      [class]="'wing-frame-' + getBirdFlyFrame(obstacle)"></StackLayout>
+        </GridLayout>
+        
+      </GridLayout>
+      
+    </AbsoluteLayout>
+    
+  </StackLayout>
+  
+  <!-- Game Controls and Status -->
+  <FlexboxLayout row="1" class="controls-container">
+    <Label [text]="getGameStatusText()" class="game-status" textWrap="true"></Label>
+    
+    <!-- Restart Button (mobile-friendly) -->
+    <Button *ngIf="gameState?.isGameOver" 
+            text="Play Again" 
+            (tap)="startGame()" 
+            class="play-again-btn"></Button>
+  </FlexboxLayout>
+
+</GridLayout>

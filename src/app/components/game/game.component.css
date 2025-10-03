@@ -1,0 +1,214 @@
+.game-container {
+  background-color: #f7f7f7;
+  height: 100%;
+}
+
+.game-area {
+  height: 100%;
+}
+
+.sky {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, #87CEEB, #E0F7FF);
+  overflow: hidden;
+}
+
+/* Cloud Styles */
+.cloud {
+  background-color: white;
+  border-radius: 50;
+  opacity: 0.8;
+}
+
+.ground {
+  background-color: #5D4037;
+  border-top-width: 1;
+  border-top-color: #4E342E;
+}
+
+/* Dinosaur Styles */
+.dinosaur-container {
+  background-color: transparent;
+}
+
+.dinosaur-body {
+  width: 40;
+  height: 40;
+  background-color: #7B1FA2;
+  border-radius: 8 8 0 0;
+  margin-bottom: 7;
+}
+
+.legs-container, .jumping-pose {
+  width: 100%;
+  height: 10;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.leg {
+  width: 8;
+  height: 15;
+  background-color: #6A1B9A;
+  border-radius: 4;
+}
+
+/* Running Animation Frames */
+.leg-frame-0 .back-leg { transform: translateY(-5px) rotate(-20deg); }
+.leg-frame-0 .front-leg { transform: translateY(0px) rotate(10deg); }
+
+.leg-frame-1 .back-leg { transform: translateY(-3px) rotate(-15deg); }
+.leg-frame-1 .front-leg { transform: translateY(-2px) rotate(5deg); }
+
+.leg-frame-2 .back-leg { transform: translateY(0px) rotate(-5deg); }
+.leg-frame-2 .front-leg { transform: translateY(-5px) rotate(0deg); }
+
+.leg-frame-3 .back-leg { transform: translateY(0px) rotate(5deg); }
+.leg-frame-3 .front-leg { transform: translateY(-5px) rotate(-5deg); }
+
+.leg-frame-4 .back-leg { transform: translateY(-2px) rotate(15deg); }
+.leg-frame-4 .front-leg { transform: translateY(-3px) rotate(-10deg); }
+
+.leg-frame-5 .back-leg { transform: translateY(-5px) rotate(20deg); }
+.leg-frame-5 .front-leg { transform: translateY(0px) rotate(-15deg); }
+
+.jumping-leg {
+  transform: translateY(-8px) rotate(-25deg);
+}
+
+/* Obstacle Styles */
+.obstacle-container {
+  background-color: transparent;
+}
+
+/* Cactus Styles */
+.cactus-body {
+  width: 20;
+  height: 40;
+  background-color: #2E7D32;
+  border-radius: 4;
+  position: relative;
+}
+
+.cactus-arm {
+  position: absolute;
+  background-color: #2E7D32;
+  border-radius: 3;
+}
+
+.cactus-arm-1 {
+  width: 12;
+  height: 8;
+  top: 10;
+  right: -6;
+  transform: rotate(30deg);
+}
+
+.cactus-arm-2 {
+  width: 10;
+  height: 6;
+  top: 25;
+  left: -5;
+  transform: rotate(-45deg);
+}
+
+/* Bird Styles */
+.bird-container {
+  background-color: transparent;
+  width: 45;
+  height: 30;
+}
+
+.bird-body {
+  width: 30;
+  height: 20;
+  background-color: #F44336;
+  border-radius: 15;
+  margin-top: 5;
+}
+
+.bird-wing {
+  position: absolute;
+  background-color: #D32F2F;
+  border-radius: 10;
+  width: 20;
+  height: 8;
+}
+
+.left-wing {
+  top: 0;
+  left: 5;
+  transform-origin: right center;
+}
+
+.right-wing {
+  top: 12;
+  right: 5;
+  transform-origin: left center;
+}
+
+/* Bird Flying Animation */
+.wing-frame-0 .left-wing { transform: rotate(30deg); }
+.wing-frame-0 .right-wing { transform: rotate(-30deg); }
+
+.wing-frame-1 .left-wing { transform: rotate(10deg); }
+.wing-frame-1 .right-wing { transform: rotate(-10deg); }
+
+.wing-frame-2 .left-wing { transform: rotate(-10deg); }
+.wing-frame-2 .right-wing { transform: rotate(10deg); }
+
+.wing-frame-3 .left-wing { transform: rotate(-30deg); }
+.wing-frame-3 .right-wing { transform: rotate(30deg); }
+
+.controls-container {
+  padding: 16;
+  background-color: #FFFFFF;
+  border-top-width: 1;
+  border-top-color: #E0E0E0;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game-status {
+  font-size: 16;
+  font-weight: bold;
+  color: #424242;
+  text-align: center;
+  margin-bottom: 8;
+}
+
+.play-again-btn {
+  background-color: #7B1FA2;
+  color: white;
+  padding: 8 16;
+  border-radius: 4;
+  font-weight: bold;
+}
+
+/* Smooth transitions for movements */
+.obstacle-container, .dinosaur-container {
+  transition: left 0.1s linear;
+}
+
+.bird-container {
+  transition: left 0.1s linear, top 0.1s ease-out;
+}
+
+/* Responsive design */
+@media (min-width: 768) {
+  .game-status {
+    font-size: 18;
+  }
+  
+  .dinosaur-body {
+    width: 44;
+    height: 44;
+  }
+  
+  .bird-body {
+    width: 35;
+    height: 25;
+  }
+}
